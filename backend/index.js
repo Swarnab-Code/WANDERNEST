@@ -5,7 +5,17 @@ import mongoose from 'mongoose';
 import userRoutes from './routes/userRoute.js';
 import authRoutes from './routes/authRoute.js';
 import cookieParser from 'cookie-parser';
-dotenv.config();
+dotenv.config({
+	path: process.env.DOTENV_CONFIG_PATH || '.env',
+});
+import { v2 as cloudinary } from 'cloudinary';
+import myHotelsRoutes from './routes/myHotels.js';
+
+cloudinary.config({
+	cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+	api_key: process.env.CLOUDINARY_API_KEY,
+	api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 const app = express();
 const PORT = process.env.PORT || 8000;
@@ -30,6 +40,7 @@ app.use(
 
 app.use('/api/users', userRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/my-hotels', myHotelsRoutes);
 
 app.listen(PORT, () => {
 	console.log(`server running on localhost:${PORT}`);
