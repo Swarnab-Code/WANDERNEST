@@ -1,7 +1,7 @@
-const API_URL = import.meta.env.VITE_API_URL || '';
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || '';
 
 export const register = async (formData) => {
-	const response = await fetch(`${API_URL}/api/users/register`, {
+	const response = await fetch(`${BACKEND_URL}/api/users/register`, {
 		method: 'POST',
 		credentials: 'include',
 		headers: {
@@ -18,7 +18,7 @@ export const register = async (formData) => {
 };
 
 export const validateToken = async () => {
-	const response = await fetch(`${API_URL}/api/auth/validate-token`, {
+	const response = await fetch(`${BACKEND_URL}/api/auth/validate-token`, {
 		credentials: 'include',
 	});
 
@@ -30,7 +30,7 @@ export const validateToken = async () => {
 };
 
 export const logIn = async (formData) => {
-	const response = await fetch(`${API_URL}/api/auth/login`, {
+	const response = await fetch(`${BACKEND_URL}/api/auth/login`, {
 		method: 'POST',
 		credentials: 'include',
 		headers: {
@@ -47,7 +47,7 @@ export const logIn = async (formData) => {
 };
 
 export const logOut = async () => {
-	const response = await fetch(`${API_URL}/api/auth/logout`, {
+	const response = await fetch(`${BACKEND_URL}/api/auth/logout`, {
 		method: 'POST',
 		credentials: 'include',
 	});
@@ -58,7 +58,7 @@ export const logOut = async () => {
 };
 
 export const addMyHotel = async (hotelFormData) => {
-	const response = await fetch(`${API_URL}/api/my-hotels`, {
+	const response = await fetch(`${BACKEND_URL}/api/my-hotels`, {
 		method: 'POST',
 		credentials: 'include',
 		body: hotelFormData,
@@ -72,12 +72,41 @@ export const addMyHotel = async (hotelFormData) => {
 };
 
 export const fetchMyHotels = async () => {
-	const response = await fetch(`${API_URL}/api/my-hotels`, {
+	const response = await fetch(`${BACKEND_URL}/api/my-hotels`, {
 		credentials: 'include',
 	});
 
 	if (!response.ok) {
 		throw new Error('Error fetching hotels');
+	}
+
+	return response.json();
+};
+
+export const fetchMyHotelById = async (hotelId) => {
+	const response = await fetch(`${BACKEND_URL}/api/my-hotels/${hotelId}`, {
+		credentials: 'include',
+	});
+
+	if (!response.ok) {
+		throw new Error('Error fetching Hotels');
+	}
+
+	return response.json();
+};
+
+export const updateMyHotelById = async (hotelFormData) => {
+	const response = await fetch(
+		`${BACKEND_URL}/api/my-hotels/${hotelFormData.get('hotelId')}`,
+		{
+			method: 'PUT',
+			body: hotelFormData,
+			credentials: 'include',
+		}
+	);
+
+	if (!response.ok) {
+		throw new Error('Failed to update Hotel');
 	}
 
 	return response.json();
