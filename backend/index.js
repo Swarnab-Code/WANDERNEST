@@ -10,6 +10,7 @@ dotenv.config({
 });
 import { v2 as cloudinary } from 'cloudinary';
 import myHotelsRoutes from './routes/myHotels.js';
+import hotelRoutes from './routes/hotels.js';
 
 cloudinary.config({
 	cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -41,6 +42,7 @@ app.use(
 app.use('/api/users', userRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/my-hotels', myHotelsRoutes);
+app.use('/api/hotels', hotelRoutes);
 
 app.listen(PORT, () => {
 	console.log(`server running on localhost:${PORT}`);
