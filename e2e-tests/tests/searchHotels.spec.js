@@ -24,8 +24,6 @@ test('should show hotel search results', async ({ page }) => {
 	await expect(page.getByText('Hotels found in City')).toBeVisible();
 	await expect(page.getByText('User Hotel')).toBeVisible();
 });
-
-// test('should show hotel detail', async ({ page }) => {
 // 	await page.goto(FRONTEND_URL);
 
 // 	await page.getByPlaceholder('Where are you going?').fill('User');
