@@ -1,10 +1,10 @@
 import { test, expect } from '@playwright/test';
 import path from 'path';
 
-const UI_URL = 'http://localhost:5173/';
+const FRONTEND_URL = 'http://localhost:5173/';
 
 test.beforeEach(async ({ page }) => {
-	await page.goto(UI_URL);
+	await page.goto(FRONTEND_URL);
 
 	await page.getByRole('link', { name: 'Login' }).click();
 
@@ -19,7 +19,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 test('should allow user to add a hotel', async ({ page }) => {
-	await page.goto(`${UI_URL}add-hotel`);
+	await page.goto(`${FRONTEND_URL}add-hotel`);
 
 	await page.locator('[name="name"]').fill('Test Hotel');
 	await page.locator('[name="city"]').fill('Test City');
@@ -48,7 +48,7 @@ test('should allow user to add a hotel', async ({ page }) => {
 });
 
 test('should display hotels', async ({ page }) => {
-	await page.goto(`${UI_URL}my-hotels`);
+	await page.goto(`${FRONTEND_URL}my-hotels`);
 
 	await expect(page.getByText('User Hotel')).toBeVisible();
 	await expect(page.getByText('Nice Hotel')).toBeVisible();
@@ -65,7 +65,7 @@ test('should display hotels', async ({ page }) => {
 });
 
 test('should edit hotel', async ({ page }) => {
-	await page.goto(`${UI_URL}my-hotels`);
+	await page.goto(`${FRONTEND_URL}my-hotels`);
 
 	await page.getByRole('link', { name: 'View Details' }).first().click();
 
