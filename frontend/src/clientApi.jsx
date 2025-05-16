@@ -148,3 +148,13 @@ export const fetchHotelById = async (hotelId) => {
 
 	return response.json();
 };
+
+export const fetchCurrentUser = async () => {
+	const response = await fetch(`${BACKEND_URL}/api/users/me`, {
+		credentials: 'include',
+	});
+	if (!response.ok) {
+		throw new Error('Error fetching user');
+	}
+	return response.json();
+};
