@@ -158,3 +158,41 @@ export const fetchCurrentUser = async () => {
 	}
 	return response.json();
 };
+
+export const createPaymentIntent = async (hotelId, numberOfNights) => {
+	const response = await fetch(
+		`${BACKEND_URL}/api/hotels/${hotelId}/bookings/payment-intent`,
+		{
+			credentials: 'include',
+			method: 'POST',
+			body: JSON.stringify({ numberOfNights }),
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		}
+	);
+
+	if (!response.ok) {
+		throw new Error('Error fetching payment intent');
+	}
+
+	return response.json();
+};
+
+export const createRoomBooking = async (formData) => {
+	const response = await fetch(
+		`${BACKEND_URL}/api/hotels/${formData.hotelId}/bookings`,
+		{
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			credentials: 'include',
+			body: JSON.stringify(formData),
+		}
+	);
+
+	if (!response.ok) {
+		throw new Error('Error booking room');
+	}
+};

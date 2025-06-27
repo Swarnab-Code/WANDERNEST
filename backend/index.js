@@ -1,13 +1,10 @@
 import express from 'express';
 import cors from 'cors';
-import dotenv from 'dotenv';
+import 'dotenv/config';
 import mongoose from 'mongoose';
 import userRoutes from './routes/userRoute.js';
 import authRoutes from './routes/authRoute.js';
 import cookieParser from 'cookie-parser';
-dotenv.config({
-	path: process.env.DOTENV_CONFIG_PATH || '.env',
-});
 import { v2 as cloudinary } from 'cloudinary';
 import myHotelsRoutes from './routes/myHotels.js';
 import hotelRoutes from './routes/hotels.js';
